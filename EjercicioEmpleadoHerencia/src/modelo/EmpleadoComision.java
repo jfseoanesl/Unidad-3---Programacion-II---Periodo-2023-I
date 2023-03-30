@@ -9,13 +9,13 @@ package modelo;
  * @author Jairo F
  */
 public class EmpleadoComision extends EmpleadoBasico{
-    
     private double valorComision;
+
     public EmpleadoComision() {
         
     }
 
-    public EmpleadoComision(int horasTrabajadasMes, double valorHora, double valorComision) {
+    public EmpleadoComision(double valorComision, int horasTrabajadasMes, double valorHora) {
         super(horasTrabajadasMes, valorHora);
         this.valorComision = valorComision;
     }
@@ -36,16 +36,17 @@ public class EmpleadoComision extends EmpleadoBasico{
 
     @Override
     public String toString() {
-        return "EmpleadoComision{horasTrabajadasMes=" + this.horasTrabajadasMes + 
+        return "EmpleadoComision{horasTrabajadasMes=" + this.getHorasTrabajadasMes() + 
                 ", valorHora=" + this.getValorHora() + 
                 ", valorComision=" + valorComision + 
-                ", Sueldo mes="+this.calcularSueldo()+'}';
+                ", Sueldo="+this.calcularSueldo()+'}';
     }
+    
     
     @Override
     public double calcularSueldo(){
         
-        return super.calcularSueldo() + this.valorComision;
-    }
+        return this.getValorComision() + super.calcularSueldo();
     
+    }
 }
