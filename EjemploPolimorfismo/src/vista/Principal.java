@@ -29,7 +29,7 @@ public class Principal {
          v.setEstado(false);
          // imprimir los datos del vehiculo segun su tipo
          // Autobus: 
-         // precio renta, km rnta, km dev
+         // precio km km rnta, km dev
          
          // tractor:
          // precio dia, fecha renta, fecha devol
