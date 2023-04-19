@@ -72,5 +72,12 @@ public class Autobus extends Vehiculo {
         return (this.kmDevolucion - this.kmRenta) * this.precioKm;
     
     }
+
+    @Override
+    public String getInfo() {
+        return " || " + "Precio KM="+ this.precioKm + 
+               " || " + "Km Renta=" + this.kmRenta + 
+               " || " + "Km Devolucion="+this.kmDevolucion;       
+    }
     
 }

@@ -79,4 +79,11 @@ public class Tractor extends Vehiculo {
     
     }
     
+    @Override
+    public String getInfo() {
+        return " || " + "Precio Dia="+ this.precioDia + 
+               " || " + "Fecha Renta=" + this.fechaRenta.toString() + 
+               " || " + "Fecha Devolucion="+this.fechaDevolucion.toString();       
+    }
+    
 }
