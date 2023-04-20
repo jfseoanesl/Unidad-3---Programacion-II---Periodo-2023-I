@@ -51,4 +51,12 @@ public abstract class Vehiculo {
     
     
     public abstract double calcularImporteRenta();
+    public abstract String getInfo();
+
+    @Override
+    public String toString() {
+        return  "placa=" + placa + this.getInfo();
+    }
+    
+    
 }

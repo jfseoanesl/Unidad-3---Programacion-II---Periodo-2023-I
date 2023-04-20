@@ -77,5 +77,12 @@ public class Tractor extends Vehiculo {
         return this.precioDia * nDias;
     
     }
+
+    @Override
+    public String getInfo() {
+        return " || Precio dia: " + this.precioDia + 
+               " || Fecha renta: " + this.fechaRenta.toString() +  
+               " || Fecha devolucion: " + this.fechaDevolucion.toString();  
+    }
     
 }
