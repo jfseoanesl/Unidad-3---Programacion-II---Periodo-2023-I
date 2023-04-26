@@ -30,7 +30,7 @@ public class Entrada {
         return entrada.next().charAt(0);
     }
     
-    public static double leerInt(String label){
+    public static int leerInt(String label){
         System.out.print(label);
         return entrada.nextInt();
     }
