@@ -6,7 +6,10 @@ package vista;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import logica.LogicRenta;
 import modelo.*;
 
 /**
@@ -21,7 +24,9 @@ public class Principal {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        List<Vehiculo> listRentados = new ArrayList();
+        //List<Vehiculo> listRentados = new ArrayList();
+        // Map <String, Vehiculo> listRentados = new HashMap();
+          LogicRenta logica = new LogicRenta();
 
 //        System.out.println(" ** RENTA DE VEHICULOS ** ");
 //        Vehiculo v = rentaVehiculo();
@@ -35,7 +40,7 @@ public class Principal {
 //
 //        imprimirList(listRentados);
 
-           menuOpciones(listRentados);
+           menuOpciones(logica);
     }
 
     public static void imprimirList(List<Vehiculo> list) {
@@ -53,18 +58,6 @@ public class Principal {
         System.out.println(v);
         System.out.println("Importe de renta: " + v.calcularImporteRenta());
         System.out.println("---------------------------------");
-
-    }
-
-    public static Vehiculo buscarRentado(String placa, List<Vehiculo> list) {
-
-        for (Vehiculo v : list) {
-            if (v.getPlaca().equalsIgnoreCase(placa)) {
-                return v;
-            }
-
-        }
-        return null;
 
     }
 
@@ -90,7 +83,7 @@ public class Principal {
 
     }
 
-    public static void menuOpciones(List<Vehiculo> list) {
+    public static void menuOpciones(LogicRenta logica) {
         int opc;
         do {
 
@@ -105,11 +98,11 @@ public class Principal {
 
                 case 1:
                     Vehiculo v = rentaVehiculo();
-                    list.add(v);
+                    logica.rentarVehiculo(v);
                     break;
                 case 2:
                     String placa = Entrada.leerString("Placa a buscar: ");
-                    Vehiculo r = buscarRentado(placa, list);
+                    Vehiculo r = logica.buscarRentado(placa);
                     if (r == null) {
                         System.out.println("EL vehiculo no esta rentado o no existe");
                     } else {
@@ -117,17 +110,18 @@ public class Principal {
                     }
                     break;
                 case 3:
-                    imprimirList(list);
+                    imprimirList(logica.informeRentas());
                     break;
-                case 4:  //System.exit(0);
+                case 4:  
                     System.out.println("Salida exitosa....");
+//                    System.exit(0);
                     break;
                 default:
                     System.out.println("opcion no disponible");
 
             }
 
-        } while (opc != 4);
+        } while (opc!=4);
 
     }
 
