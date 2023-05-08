@@ -6,8 +6,13 @@ package vista;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import modelo.*;
+import persistencia.IRenta;
+import persistencia.ListVehiculo;
+import persistencia.MapaVehiculo;
 
 /**
  *
@@ -20,26 +25,59 @@ public class Principal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        List<Vehiculo> listRentados = new ArrayList();
+        //List<Vehiculo> listRentados = new ArrayList();
+        IRenta  listRentados = new MapaVehiculo();
+        menuOpciones(listRentados);
         
-        System.out.println(" ** RENTA DE VEHICULOS ** ");
         
-        Vehiculo v = rentaVehiculo();
-        listRentados.add(v);
         
-        Vehiculo v2 = rentaVehiculo();
-        listRentados.add(v2);
-        
-        Vehiculo v3 = rentaVehiculo();
-        listRentados.add(v3);
-        
+    }
+    
+    public static void informeRenta(IRenta list){
         System.out.println("** INFORMES DE DEVOLUCION **");
         System.out.println("----------------------------");
-        for(Vehiculo r : listRentados){
+        for(Vehiculo r : list.listRentados()){
             devolucionVehiculo(r);
         }
+    }
+    
+    public static void menuOpciones(IRenta list){
         
+        int opc;
+        do{
         
+            System.out.println(" ** MENU DE OPCIONES **");
+            System.out.println("1. Renta de vehiculo");
+            System.out.println("2. Devolucion de vehiculo");
+            System.out.println("3. Informe de rentas");
+            System.out.println("4. Salir");
+            System.out.println("");
+            opc = Entrada.leerInt("Selecciones una opcion: ");
+            switch(opc){
+                case 1: 
+                        Vehiculo v = rentaVehiculo();
+                        list.registrarVehiculo(v);
+                        break;
+                case 2: String placa = Entrada.leerString("Placa: ");
+                        Vehiculo encontrado = buscarPorPlaca(placa, list);
+                        if(encontrado==null){
+                            System.out.println("El Vehiculo no ha sido rentado.. ");
+                        }
+                        else{
+                            devolucionVehiculo(encontrado);
+                        }
+                        break;
+                case 3:  informeRenta(list);
+                         break;
+                case 4:  System.out.println("Ha finalizado con exito");
+                         System.exit(0);
+                         break;
+                default: System.out.println("Opcion no disponible, seleccione nuevamente");
+            }
+            
+            
+        }while(true);
+    
     }
     
     public static Vehiculo rentaVehiculo(){
@@ -71,6 +109,12 @@ public class Principal {
         }
         
         return v;
+    }
+    
+    public static Vehiculo buscarPorPlaca(String placa, IRenta list){
+        
+        return list.buscarVehiculoPorPlaca(placa);
+    
     }
     
     public static void devolucionVehiculo(Vehiculo v){
